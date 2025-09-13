@@ -1,0 +1,8 @@
+com/personalbank/domain/model/Client.class
+com/personalbank/domain/model/TransactionStatus.class
+com/personalbank/domain/model/Account.class
+com/personalbank/PersonalBankApplication.class
+com/personalbank/domain/model/TransactionType.class
+com/personalbank/domain/model/AccountStatus.class
+com/personalbank/domain/model/Transaction.class
+com/personalbank/domain/model/AccountType.class
