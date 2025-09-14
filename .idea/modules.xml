@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/personal_bank.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/personal_bank.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/personal_bank.application.test.iml" filepath="$PROJECT_DIR$/.idea/modules/application/personal_bank.application.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/model/personal_bank.model.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/model/personal_bank.model.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/model/personal_bank.model.test.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/model/personal_bank.model.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/port/personal_bank.port.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/port/personal_bank.port.main.iml" />
     </modules>
   </component>
