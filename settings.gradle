@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+buildCache {
+    local {
+        directory = new File(rootDir, 'build-cache')
+    }
+}
+
+rootProject.name = 'personal_bank'
+
+include ':model', ':port', 'usecase'
+project(':model').projectDir = file('./domain/model')
+project(':port').projectDir = file('./domain/port')
+project(':usecase').projectDir = file('./application/usecase')
+
+
+include ':config'
+project(':config').projectDir = file('./application/config')

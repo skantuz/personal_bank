@@ -1,0 +1,8 @@
+##Spring Configuration
+server:
+  port: 8080
+spring:
+  application:
+    name: personal_bank
+  devtools:
+    add-properties: false
