@@ -1,4 +1,4 @@
-package info.skantuz.model;
+package info.skantuz.personal_bank.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

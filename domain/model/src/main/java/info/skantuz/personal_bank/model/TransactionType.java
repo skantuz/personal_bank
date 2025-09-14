@@ -1,4 +1,4 @@
-package info.skantuz.model;
+package info.skantuz.personal_bank.model;
 
 /**
  * Enum representing the types of financial transactions.

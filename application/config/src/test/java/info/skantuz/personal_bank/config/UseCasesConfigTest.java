@@ -1,4 +1,4 @@
-package info.skantuz.config;
+package info.skantuz.personal_bank.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
