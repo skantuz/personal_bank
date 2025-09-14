@@ -1,5 +1,7 @@
 package info.skantuz.personal_bank.model;
 
+    import info.skantuz.personal_bank.model.value_object.TransactionType;
+
     import java.math.BigDecimal;
     import java.time.LocalDateTime;
 

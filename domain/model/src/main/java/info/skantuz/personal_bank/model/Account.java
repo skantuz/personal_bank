@@ -1,5 +1,8 @@
 package info.skantuz.personal_bank.model;
 
+import info.skantuz.personal_bank.model.value_object.AccountState;
+import info.skantuz.personal_bank.model.value_object.AccountType;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -20,7 +23,7 @@ public record Account(
         String id,
         AccountType accountType,
         String accountNumber,
-        String status,
+        AccountState status,
         BigDecimal balance,
         boolean exemptGMF,
         LocalDateTime createdAt,
@@ -44,7 +47,7 @@ public record Account(
     public static Account of(String id,
                              AccountType accountType,
                              String accountNumber,
-                             String status,
+                             AccountState status,
                              BigDecimal balance,
                              boolean exemptGMF,
                              LocalDateTime createdAt,
@@ -69,7 +72,7 @@ public record Account(
         private String id;
         private AccountType accountType;
         private String accountNumber;
-        private String status;
+        private AccountState status;
         private BigDecimal balance;
         private boolean exemptGMF;
         private LocalDateTime createdAt;
@@ -113,7 +116,7 @@ public record Account(
          * @param status the account status.
          * @return this builder.
          */
-        public AccountBuilder status(String status) {
+        public AccountBuilder status(AccountState status) {
             this.status = status;
             return this;
         }

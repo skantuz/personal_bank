@@ -1,4 +1,4 @@
-package info.skantuz.personal_bank.model;
+package info.skantuz.personal_bank.model.value_object;
 
 /**
  * Enum representing the types of bank accounts.
