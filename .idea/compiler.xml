@@ -17,7 +17,7 @@
         <module name="personal_bank.config.test" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="21">
       <module name="personal_bank.application" target="21" />
       <module name="personal_bank.domain" target="21" />
     </bytecodeTargetLevel>

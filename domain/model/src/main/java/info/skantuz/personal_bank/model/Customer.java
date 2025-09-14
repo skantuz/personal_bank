@@ -40,8 +40,6 @@ public record Customer(
      * @param lastname             Last name.
      * @param email                Email address.
      * @param birthdate            Date of birth.
-     * @param createdAt            Creation timestamp.
-     * @param updatedAt            Last update timestamp.
      * @return a new {@code Customer} instance.
      */
     public static Customer of(String id,
@@ -50,11 +48,109 @@ public record Customer(
                               String name,
                               String lastname,
                               String email,
-                              LocalDate birthdate,
-                              LocalDateTime createdAt,
-                              LocalDateTime updatedAt) {
+                              LocalDate birthdate) {
         return new Customer(id, identificationType, identificationNumber,
-                name, lastname, email, birthdate, createdAt, updatedAt);
+                name, lastname, email, birthdate, LocalDateTime.now(), LocalDateTime.now());
+    }
+
+    /**
+     * Returns a new {@code Customer} with the updated identification type and refreshed updatedAt.
+     *
+     * @param identificationType the new identification type
+     * @return a new {@code Customer} instance
+     */
+    public Customer setIdentificationType(String identificationType) {
+        return new Customer(
+            this.id(),
+            identificationType,
+            this.identificationNumber(),
+            this.name(),
+            this.lastname(),
+            this.email(),
+            this.birthdate(),
+            this.createdAt(),
+            LocalDateTime.now()
+        );
+    }
+
+    /**
+     * Returns a new {@code Customer} with the updated identification number and refreshed updatedAt.
+     *
+     * @param identificationNumber the new identification number
+     * @return a new {@code Customer} instance
+     */
+    public Customer setIdentificationNumber(String identificationNumber) {
+        return new Customer(
+            this.id(),
+            this.identificationType(),
+            identificationNumber,
+            this.name(),
+            this.lastname(),
+            this.email(),
+            this.birthdate(),
+            this.createdAt(),
+            LocalDateTime.now()
+        );
+    }
+
+    /**
+     * Returns a new {@code Customer} with the updated name and refreshed updatedAt.
+     *
+     * @param name the new name
+     * @return a new {@code Customer} instance
+     */
+    public Customer setName(String name) {
+        return new Customer(
+            this.id(),
+            this.identificationType(),
+            this.identificationNumber(),
+            name,
+            this.lastname(),
+            this.email(),
+            this.birthdate(),
+            this.createdAt(),
+            LocalDateTime.now()
+        );
+    }
+
+    /**
+     * Returns a new {@code Customer} with the updated lastname and refreshed updatedAt.
+     *
+     * @param lastname the new lastname
+     * @return a new {@code Customer} instance
+     */
+    public Customer setLastname(String lastname) {
+        return new Customer(
+            this.id(),
+            this.identificationType(),
+            this.identificationNumber(),
+            this.name(),
+            lastname,
+            this.email(),
+            this.birthdate(),
+            this.createdAt(),
+            LocalDateTime.now()
+        );
+    }
+
+    /**
+     * Returns a new {@code Customer} with the updated email and refreshed updatedAt.
+     *
+     * @param email the new email address
+     * @return a new {@code Customer} instance
+     */
+    public Customer setEmail(String email) {
+        return new Customer(
+            this.id(),
+            this.identificationType(),
+            this.identificationNumber(),
+            this.name(),
+            this.lastname(),
+            email,
+            this.birthdate(),
+            this.createdAt(),
+            LocalDateTime.now()
+        );
     }
 
     /**
@@ -76,9 +172,7 @@ public record Customer(
         private String name;
         private String lastname;
         private String email;
-        private java.time.LocalDate birthdate;
-        private java.time.LocalDateTime createdAt;
-        private java.time.LocalDateTime updatedAt;
+        private LocalDate birthdate;
 
         private CustomerBuilder() {
         }
@@ -155,30 +249,8 @@ public record Customer(
          * @param birthdate the date of birth.
          * @return this builder.
          */
-        public CustomerBuilder birthdate(java.time.LocalDate birthdate) {
+        public CustomerBuilder birthdate(LocalDate birthdate) {
             this.birthdate = birthdate;
-            return this;
-        }
-
-        /**
-         * Sets the creation timestamp.
-         *
-         * @param createdAt the creation date and time.
-         * @return this builder.
-         */
-        public CustomerBuilder createdAt(java.time.LocalDateTime createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        /**
-         * Sets the last update timestamp.
-         *
-         * @param updatedAt the last update date and time.
-         * @return this builder.
-         */
-        public CustomerBuilder updatedAt(java.time.LocalDateTime updatedAt) {
-            this.updatedAt = updatedAt;
             return this;
         }
 
@@ -188,8 +260,8 @@ public record Customer(
          * @return a new {@code Customer}.
          */
         public Customer build() {
-            return new Customer(id, identificationType, identificationNumber,
-                    name, lastname, email, birthdate, createdAt, updatedAt);
+            return Customer.of(id, identificationType, identificationNumber,
+                    name, lastname, email, birthdate);
         }
     }
 }

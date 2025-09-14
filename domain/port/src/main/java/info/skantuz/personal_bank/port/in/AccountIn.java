@@ -15,7 +15,10 @@ public interface AccountIn {
      * @param authToken the authentication token for authorization
      * @return a Mono emitting the created account
      */
-    Mono<Account> createAccount(Account account, String authToken);
+    Mono<Account> createAccount(String identificationType,
+                                String identificationNumber,
+                                Account.AccountBuilder account,
+                                String authToken);
 
     /** Retrieves an account by its ID.
      *
