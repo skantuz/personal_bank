@@ -27,6 +27,7 @@ import java.time.LocalDate;
 import static info.skantuz.personal_bank.model.value_object.AccountType.CHECKING;
 import static info.skantuz.personal_bank.model.value_object.AccountType.SAVINGS;
 import static info.skantuz.personal_bank.model.value_object.TransactionType.DEPOSIT;
+import static info.skantuz.personal_bank.model.value_object.TransactionType.TRANSFER;
 import static info.skantuz.personal_bank.model.value_object.TransactionType.WITHDRAWAL;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -59,10 +60,9 @@ class TransactionUseCaseTest {
 
     Customer customer = Customer.of("C1", "ID", "123", "John", "Doe",
         "john.doe@sas.com", LocalDate.of(1990, 01, 01));
+
     Account account = Account.of( SAVINGS, "3312345678", AccountState.ACTIVE,
         BigDecimal.valueOf(1000L), false, customer.id());
-
-    when(account.deposit(any())).thenReturn(account);
 
     when(authValidation.validateToken(anyString())).thenReturn(Mono.just("user"));
     when(customerRead.getCustomerByDocumentTypeAndNumber(any(), any())).thenReturn(Mono.just(customer));
@@ -76,19 +76,13 @@ class TransactionUseCaseTest {
 
   @Test
   void testWithdrawalInsufficientFunds() {
-    TransactionInput input = mock(TransactionInput.class);
-    when(input.type()).thenReturn(WITHDRAWAL);
-    when(input.identificationTypeWithdraw()).thenReturn("ID");
-    when(input.identificationNumberWithdraw()).thenReturn("123");
-    when(input.accountNumberWithdraw()).thenReturn("ACC1");
-    when(input.accountTypeWithdraw()).thenReturn(SAVINGS);
-    when(input.amount()).thenReturn(BigDecimal.TEN);
+    TransactionInput input = TransactionInput.builder().amount(BigDecimal.valueOf(1000L))
+        .identificationTypeWithdraw("ID").identificationNumberWithdraw("123")
+        .accountNumberWithdraw("ACC1").accountTypeWithdraw(SAVINGS).type(WITHDRAWAL).build();
 
-    Customer customer = mock(Customer.class);
-    when(customer.id()).thenReturn("C1");
-    Account account = mock(Account.class);
-    when(account.customerId()).thenReturn("C1");
-    when(account.canWithdraw(any())).thenReturn(false);
+    Customer customer = Customer.builder().id("C1").build();
+    Account account = Account.builder().accountType(SAVINGS).status(AccountState.ACTIVE)
+        .balance(BigDecimal.valueOf(500L)).build("ACC1", customer.id());
 
     when(authValidation.validateToken(anyString())).thenReturn(Mono.just("user"));
     when(customerRead.getCustomerByDocumentTypeAndNumber(any(), any())).thenReturn(Mono.just(customer));
@@ -97,40 +91,21 @@ class TransactionUseCaseTest {
     StepVerifier.create(useCase.transaction(input, "token"))
         .verifyErrorSatisfies(throwable ->{
           Assertions.assertInstanceOf(ApiException.class, throwable);
-          Assertions.assertEquals("Insufficient funds for WITHDRAWAL", ((ApiException) throwable).getDescription());
+          Assertions.assertEquals("The account does not have enough balance.", ((ApiException) throwable).getDescription());
         });
   }
 
   @Test
   void testTransferSuccess() {
-    TransactionInput input = mock(TransactionInput.class);
-    when(input.type()).thenReturn(TransactionType.TRANSFER);
+    TransactionInput input = TransactionInput.of(TRANSFER, SAVINGS, CHECKING,
+        "ACC1", "ACC2", "ID", "ID2", "123", "456", BigDecimal.TEN);
 
-    // Withdrawal mocks
-    when(input.identificationTypeWithdraw()).thenReturn("ID");
-    when(input.identificationNumberWithdraw()).thenReturn("123");
-    when(input.accountNumberWithdraw()).thenReturn("ACC1");
-    when(input.accountTypeWithdraw()).thenReturn(SAVINGS);
-    when(input.amount()).thenReturn(BigDecimal.TEN);
-
-    // Deposit mocks
-    when(input.identificationTypeDeposit()).thenReturn("ID2");
-    when(input.identificationNumberDeposit()).thenReturn("456");
-    when(input.accountNumberDeposit()).thenReturn("ACC2");
-    when(input.accountTypeDeposit()).thenReturn(CHECKING);
-
-    Customer customerW = mock(Customer.class);
-    when(customerW.id()).thenReturn("C1");
-    Account accountW = mock(Account.class);
-    when(accountW.customerId()).thenReturn("C1");
-    when(accountW.canWithdraw(any())).thenReturn(true);
-    when(accountW.withdraw(any())).thenReturn(accountW);
-
-    Customer customerD = mock(Customer.class);
-    when(customerD.id()).thenReturn("C2");
-    Account accountD = mock(Account.class);
-    when(accountD.customerId()).thenReturn("C2");
-    when(accountD.deposit(any())).thenReturn(accountD);
+    Customer customerW = Customer.builder().id("C1").build();
+    Account accountW = Account.of(SAVINGS, "ACC1", AccountState.ACTIVE,
+        BigDecimal.valueOf(100L), false, customerW.id());
+    Customer customerD = Customer.builder().id("C2").build();
+    Account accountD = Account.of(CHECKING, "ACC2", AccountState.ACTIVE,
+        BigDecimal.valueOf(50L), false, customerD.id());
 
     when(authValidation.validateToken(anyString())).thenReturn(Mono.just("user"));
     when(customerRead.getCustomerByDocumentTypeAndNumber("ID", "123")).thenReturn(Mono.just(customerW));
@@ -139,20 +114,6 @@ class TransactionUseCaseTest {
     when(accountRead.getAccountByAccountNumberAndType("ACC2", CHECKING)).thenReturn(Mono.just(accountD));
     when(accountWrite.updateAccountData(any(), any())).thenReturn(Mono.just(accountW))
         .thenReturn(Mono.just(accountD));
-
-    Transaction transactionW = mock(Transaction.class);
-    when(transactionW.withdrawAccount()).thenReturn(accountW);
-    when(transactionW.amount()).thenReturn(BigDecimal.TEN);
-    when(transactionW.type()).thenReturn(WITHDRAWAL);
-    when(transactionW.id()).thenReturn("T1");
-    when(Transaction.ofWithdrawal(any(), any(), any())).thenReturn(transactionW);
-
-    Transaction transactionD = mock(Transaction.class);
-    when(transactionD.depositAccount()).thenReturn(accountD);
-    when(transactionD.amount()).thenReturn(BigDecimal.TEN);
-    when(transactionD.type()).thenReturn(DEPOSIT);
-    when(transactionD.id()).thenReturn("T2");
-    when(Transaction.ofDeposit(any(), any(), any())).thenReturn(transactionD);
 
     StepVerifier.create(useCase.transaction(input, "token"))
         .expectNext("Transferencia realizada con éxito nuevo saldo: " + accountD.balance())

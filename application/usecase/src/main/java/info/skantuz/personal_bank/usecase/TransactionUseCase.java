@@ -54,7 +54,7 @@ public class TransactionUseCase implements TransactionsIn {
             accountRead.getAccountByAccountNumberAndType(transactionInput.accountNumberDeposit(),
                 transactionInput.accountTypeDeposit()))
         .map(tuple -> {
-          if (tuple.getT1().id().equals(tuple.getT2().customerId())) {
+          if (tuple.getT1().id().equals(tuple.getT2().customerId()) && tuple.getT2().isActive() ) {
             var account = tuple.getT2();
             var amount = transactionInput.amount();
             return Transaction.ofDeposit(account.deposit(amount), amount, user);
@@ -76,7 +76,7 @@ public class TransactionUseCase implements TransactionsIn {
             accountRead.getAccountByAccountNumberAndType(transactionInput.accountNumberWithdraw(),
                 transactionInput.accountTypeWithdraw()))
         .map(tuple -> {
-          if (tuple.getT1().id().equals(tuple.getT2().customerId())) {
+          if (tuple.getT1().id().equals(tuple.getT2().customerId()) && tuple.getT2().isActive() ) {
             var account = tuple.getT2();
             var amount = transactionInput.amount();
             if (account.canWithdraw(amount)) {

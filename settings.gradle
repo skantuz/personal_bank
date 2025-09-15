@@ -4,11 +4,6 @@ pluginManagement {
         mavenCentral()
     }
 }
-buildCache {
-    local {
-        directory = new File(rootDir, 'build-cache')
-    }
-}
 
 rootProject.name = 'personal_bank'
 

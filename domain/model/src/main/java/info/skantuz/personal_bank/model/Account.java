@@ -125,6 +125,10 @@ public record Account(
         this.exemptGMF, this.createdAt, this.updatedAt, this.customerId);
   }
 
+  public boolean isActive() {
+    return this.status == AccountState.ACTIVE;
+  }
+
   /**
    * Builder class for constructing {@link Account} instances.
    */
