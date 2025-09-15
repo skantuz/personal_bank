@@ -18,3 +18,6 @@ project(':config').projectDir = file('./application/config')
 
 include ':reactive-web'
 project(':reactive-web').projectDir = file('./adapter/reactive-web')
+
+include 'postgres'
+project(':postgres').projectDir = file('./adapter/postgres')

@@ -10,6 +10,7 @@
         <module name="personal_bank.model.test" />
         <module name="personal_bank.port.test" />
         <module name="personal_bank.usecase.test" />
+        <module name="personal_bank.postgres.test" />
         <module name="personal_bank.config.main" />
         <module name="personal_bank.model.main" />
         <module name="personal_bank.port.main" />
@@ -17,6 +18,7 @@
         <module name="personal_bank.usecase.main" />
         <module name="personal_bank.config.test" />
         <module name="personal_bank.reactive-web.test" />
+        <module name="personal_bank.postgres.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21">
@@ -35,6 +37,9 @@
       <module name="personal_bank.config.test" options="-parameters" />
       <module name="personal_bank.domain.main" options="-parameters -Xlint:all Xlint:-processing -Werror" />
       <module name="personal_bank.main" options="-parameters -Xlint:all Xlint:-processing -Werror" />
+      <module name="personal_bank.postgres" options="-parameters" />
+      <module name="personal_bank.postgres.main" options="-parameters" />
+      <module name="personal_bank.postgres.test" options="-parameters" />
       <module name="personal_bank.reactive-web" options="-parameters" />
       <module name="personal_bank.reactive-web.main" options="-parameters" />
       <module name="personal_bank.reactive-web.test" options="-parameters" />

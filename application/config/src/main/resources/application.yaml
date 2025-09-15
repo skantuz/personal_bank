@@ -13,3 +13,13 @@ spring:
     name: personal_bank
   devtools:
     add-properties: false
+  r2dbc:
+    url: ${db-url}
+    username: ${db-user}
+    password: ${db-password}
+    pool:
+      enabled: true
+      initial-size: 10
+      max-size: 50
+      max-idle-time: 0m
+      validation-query: SELECT 1
