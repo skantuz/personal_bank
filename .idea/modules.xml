@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/jwt/personal_bank.jwt.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/jwt/personal_bank.jwt.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/jwt/personal_bank.jwt.test.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/jwt/personal_bank.jwt.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/model/personal_bank.model.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/model/personal_bank.model.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/port/personal_bank.port.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/port/personal_bank.port.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/postgres/personal_bank.postgres.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/postgres/personal_bank.postgres.main.iml" />

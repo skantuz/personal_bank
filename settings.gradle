@@ -21,3 +21,6 @@ project(':reactive-web').projectDir = file('./adapter/reactive-web')
 
 include 'postgres'
 project(':postgres').projectDir = file('./adapter/postgres')
+
+include 'jwt'
+project(':jwt').projectDir = file('./adapter/jwt')

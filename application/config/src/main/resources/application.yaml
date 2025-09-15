@@ -1,10 +1,12 @@
 app:
   http:
     auth-header: Authorization
+  jwt:
+    secret: ${secret-key}
+    expiration: 3600000
   name: personal_bank
   version: 1.0.0
   description: Personal Bank Application
-##Spring Configuration
 server:
   port: 8080
   context-path: /v1/personal_bank
