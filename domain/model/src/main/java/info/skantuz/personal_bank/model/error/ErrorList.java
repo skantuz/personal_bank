@@ -13,6 +13,7 @@ public enum ErrorList {
   INVALID_ACCOUNT_STATE(400, "ACC_003", "Invalid Account State", "The account state is invalid for this operation."),
   TRANSACTION_LIMIT_EXCEEDED(400, "ACC_004", "Transaction Limit Exceeded", "You have exceeded your transaction limit."),
   UNAUTHORIZED_ACCESS(401, "AUTH_001", "Unauthorized Access", "You are not authorized to perform this action."),
+  FORBIDDEN_ACTION(403, "AUTH_002", "Forbidden Action", "You do not have permission to perform this action."),
   DUPLICATE_TRANSACTION(409, "TXN_001", "Duplicate Transaction", "This transaction has already been processed."),
   CURRENCY_MISMATCH(400, "CUR_001", "Currency Mismatch", "The currencies do not match."),
   INVALID_AMOUNT(400, "AMT_001", "Invalid Amount", "The amount specified is invalid."),

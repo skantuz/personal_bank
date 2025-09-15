@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @param identificationType   Type of identification (e.g., passport, ID card).
  * @param identificationNumber Identification number.
  * @param name                 Customer's first name.
- * @param lastname             Customer's last name.
+ * @param lastName             Customer's last name.
  * @param email                Customer's email address.
  * @param birthdate            Customer's date of birth.
  * @param createdAt            Date and time when the customer was created.
@@ -24,7 +24,7 @@ public record Customer(
         String identificationType,
         String identificationNumber,
         String name,
-        String lastname,
+        String lastName,
         String email,
         LocalDate birthdate,
         LocalDateTime createdAt,
@@ -37,7 +37,7 @@ public record Customer(
      * @param identificationType   Type of identification.
      * @param identificationNumber Identification number.
      * @param name                 First name.
-     * @param lastname             Last name.
+     * @param lastName             Last name.
      * @param email                Email address.
      * @param birthdate            Date of birth.
      * @return a new {@code Customer} instance.
@@ -46,11 +46,11 @@ public record Customer(
                               String identificationType,
                               String identificationNumber,
                               String name,
-                              String lastname,
+                              String lastName,
                               String email,
                               LocalDate birthdate) {
         return new Customer(id, identificationType, identificationNumber,
-                name, lastname, email, birthdate, LocalDateTime.now(), LocalDateTime.now());
+                name, lastName, email, birthdate, LocalDateTime.now(), LocalDateTime.now());
     }
 
     /**
@@ -65,7 +65,7 @@ public record Customer(
             identificationType,
             this.identificationNumber(),
             this.name(),
-            this.lastname(),
+            this.lastName(),
             this.email(),
             this.birthdate(),
             this.createdAt(),
@@ -85,7 +85,7 @@ public record Customer(
             this.identificationType(),
             identificationNumber,
             this.name(),
-            this.lastname(),
+            this.lastName(),
             this.email(),
             this.birthdate(),
             this.createdAt(),
@@ -105,7 +105,7 @@ public record Customer(
             this.identificationType(),
             this.identificationNumber(),
             name,
-            this.lastname(),
+            this.lastName(),
             this.email(),
             this.birthdate(),
             this.createdAt(),
@@ -116,16 +116,16 @@ public record Customer(
     /**
      * Returns a new {@code Customer} with the updated lastname and refreshed updatedAt.
      *
-     * @param lastname the new lastname
+     * @param lastName the new lastname
      * @return a new {@code Customer} instance
      */
-    public Customer setLastname(String lastname) {
+    public Customer setLastName(String lastName) {
         return new Customer(
             this.id(),
             this.identificationType(),
             this.identificationNumber(),
             this.name(),
-            lastname,
+            lastName,
             this.email(),
             this.birthdate(),
             this.createdAt(),
@@ -145,7 +145,7 @@ public record Customer(
             this.identificationType(),
             this.identificationNumber(),
             this.name(),
-            this.lastname(),
+            this.lastName(),
             email,
             this.birthdate(),
             this.createdAt(),
@@ -170,7 +170,7 @@ public record Customer(
         private String identificationType;
         private String identificationNumber;
         private String name;
-        private String lastname;
+        private String lastName;
         private String email;
         private LocalDate birthdate;
 
@@ -224,11 +224,11 @@ public record Customer(
         /**
          * Sets the last name.
          *
-         * @param lastname the last name.
+         * @param lastName the last name.
          * @return this builder.
          */
-        public CustomerBuilder lastname(String lastname) {
-            this.lastname = lastname;
+        public CustomerBuilder lastName(String lastName) {
+            this.lastName = lastName;
             return this;
         }
 
@@ -261,7 +261,7 @@ public record Customer(
          */
         public Customer build() {
             return Customer.of(id, identificationType, identificationNumber,
-                    name, lastname, email, birthdate);
+                    name, lastName, email, birthdate);
         }
     }
 }

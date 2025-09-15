@@ -13,8 +13,10 @@
         <module name="personal_bank.config.main" />
         <module name="personal_bank.model.main" />
         <module name="personal_bank.port.main" />
+        <module name="personal_bank.reactive-web.main" />
         <module name="personal_bank.usecase.main" />
         <module name="personal_bank.config.test" />
+        <module name="personal_bank.reactive-web.test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21">
@@ -24,12 +26,18 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="personal_bank.api_rest" options="-parameters" />
+      <module name="personal_bank.api_rest.main" options="-parameters" />
+      <module name="personal_bank.api_rest.test" options="-parameters" />
       <module name="personal_bank.application.main" options="-parameters -Xlint:all Xlint:-processing -Werror" />
       <module name="personal_bank.config" options="-parameters" />
       <module name="personal_bank.config.main" options="-parameters" />
       <module name="personal_bank.config.test" options="-parameters" />
       <module name="personal_bank.domain.main" options="-parameters -Xlint:all Xlint:-processing -Werror" />
       <module name="personal_bank.main" options="-parameters -Xlint:all Xlint:-processing -Werror" />
+      <module name="personal_bank.reactive-web" options="-parameters" />
+      <module name="personal_bank.reactive-web.main" options="-parameters" />
+      <module name="personal_bank.reactive-web.test" options="-parameters" />
       <module name="personal_bank.usecase" options="-parameters" />
       <module name="personal_bank.usecase.main" options="-parameters" />
       <module name="personal_bank.usecase.test" options="-parameters" />

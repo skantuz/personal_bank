@@ -5,7 +5,7 @@ import info.skantuz.personal_bank.model.Account;
 import info.skantuz.personal_bank.model.Transaction;
 import info.skantuz.personal_bank.model.TransactionInput;
 import info.skantuz.personal_bank.model.error.ErrorList;
-import info.skantuz.personal_bank.port.in.TransactionsIn;
+import info.skantuz.personal_bank.port.in.TransactionIn;
 import info.skantuz.personal_bank.port.out.AccountRead;
 import info.skantuz.personal_bank.port.out.AccountWrite;
 import info.skantuz.personal_bank.port.out.AuthValidation;
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class TransactionUseCase implements TransactionsIn {
+public class TransactionUseCase implements TransactionIn {
 
   private final CustomerRead customerRead;
   private final AccountRead accountRead;

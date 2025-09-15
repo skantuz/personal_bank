@@ -1,6 +1,13 @@
+app:
+  http:
+    auth-header: Authorization
+  name: personal_bank
+  version: 1.0.0
+  description: Personal Bank Application
 ##Spring Configuration
 server:
   port: 8080
+  context-path: /v1/personal_bank
 spring:
   application:
     name: personal_bank

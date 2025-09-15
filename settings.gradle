@@ -15,3 +15,6 @@ project(':usecase').projectDir = file('./application/usecase')
 
 include ':config'
 project(':config').projectDir = file('./application/config')
+
+include ':reactive-web'
+project(':reactive-web').projectDir = file('./adapter/reactive-web')

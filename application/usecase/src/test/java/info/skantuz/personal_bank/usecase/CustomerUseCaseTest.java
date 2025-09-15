@@ -56,7 +56,7 @@ class CustomerUseCaseTest {
   @Test
   void createCustomer_whenCustomerDoesNotExist_shouldCreateCustomer() {
     Customer customer = Customer.builder().identificationType("DNI").identificationNumber("123")
-        .name("John").lastname("Doe").email("john.doe@sas.com").birthdate(LocalDate.of(1999, 12, 31))
+        .name("John").lastName("Doe").email("john.doe@sas.com").birthdate(LocalDate.of(1999, 12, 31))
         .id("id").build();
     Customer savedCustomer = Customer.of("id", "DNI", "123", "John", "Doe",
         "jhon.doe@sas.com", LocalDate.of(1999, 12, 31));

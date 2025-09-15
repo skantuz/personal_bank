@@ -34,6 +34,7 @@ public record Account(
     LocalDateTime updatedAt,
     String customerId
 ) {
+
   /**
    * Static factory method to create an {@code Account} instance.
    *
@@ -51,7 +52,35 @@ public record Account(
                            BigDecimal balance,
                            boolean exemptGMF,
                            String customerId) {
-    return new Account(UUID.randomUUID().toString(), accountType, accountNumber, status, balance,
+
+    return new Account(UUID.randomUUID().toString(), accountType, accountNumber, status,
+        balance, exemptGMF, LocalDateTime.now(), LocalDateTime.now(), customerId);
+  }
+
+  /**
+   * Static factory method to create an {@code Account} instance.
+   *
+   * @param accountId    Unique identifier for the account.
+   * @param accountType   Type of the account.
+   * @param accountNumber Account number.
+   * @param status        Account status.
+   * @param balance       Account balance.
+   * @param exemptGMF     Exemption from GMF.
+   * @param customerId    Owner customer ID.
+   * @return a new {@code Account} instance.
+   */
+  public static Account of(String accountId,
+                           AccountType accountType,
+                           String accountNumber,
+                           AccountState status,
+                           BigDecimal balance,
+                           boolean exemptGMF,
+                           String customerId) {
+
+    if (accountId == null || accountId.isEmpty()) {
+          accountId = UUID.randomUUID().toString();
+    }
+    return new Account(accountId, accountType, accountNumber, status, balance,
         exemptGMF, LocalDateTime.now(), LocalDateTime.now(), customerId);
   }
 
@@ -145,6 +174,7 @@ public record Account(
     private AccountState status;
     private BigDecimal balance;
     private boolean exemptGMF;
+    private String accountId;
 
     private AccountBuilder() {
     }
@@ -199,7 +229,18 @@ public record Account(
      * @return a new {@code Account}.
      */
     public Account build(String accountNumber, String customerId) {
-      return Account.of(accountType, accountNumber, status, balance, exemptGMF, customerId);
+      return Account.of(accountId,accountType, accountNumber, status, balance, exemptGMF, customerId);
+    }
+
+    /**
+     * Sets the account ID.
+     *
+     * @param id the account ID.
+     * @return this builder.
+     */
+    public AccountBuilder id(String id) {
+      this.accountId = id;
+      return this;
     }
   }
 }
